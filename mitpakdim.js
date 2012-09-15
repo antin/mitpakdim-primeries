@@ -42,7 +42,7 @@
     function MemberAgenda() {
       MemberAgenda.__super__.constructor.apply(this, arguments);
     }
-    MemberAgenda.prototype.urlRoot = "http://api.dev.oknesset.org/api/v2/member-agendas/";
+    MemberAgenda.prototype.urlRoot = "http://oknesset.org/api/v2/member-agendas/";
     MemberAgenda.prototype.sync = root.JSONPSync;
     return MemberAgenda;
   })();
@@ -89,7 +89,7 @@
     }
     MemberList.prototype.model = root.Member;
     MemberList.prototype.localObject = window.mit.members;
-    MemberList.prototype.url = "http://api.dev.oknesset.org/api/v2/member/";
+    MemberList.prototype.url = "http://oknesset.org/api/v2/member/";
     return MemberList;
   })();
   root.TemplateView = (function() {
@@ -221,7 +221,7 @@
       this.partyListView = new root.DropdownContainer({
         collection: new root.JSONPCollection(null, {
           model: root.MiscModel,
-          url: "http://api.dev.oknesset.org/api/v2/party/",
+          url: "http://oknesset.org/api/v2/party/",
           localObject: window.mit.parties
         })
       });
@@ -230,7 +230,7 @@
       this.agendaListView = new root.ListView({
         collection: new root.JSONPCollection(null, {
           model: root.MiscModel,
-          url: "http://api.dev.oknesset.org/api/v2/agenda/",
+          url: "http://oknesset.org/api/v2/agenda/",
           localObject: window.mit.agendas
         }),
         itemView: (function() {
@@ -295,6 +295,7 @@
     AppView.prototype.calcOneAsync = function(member, agendasInput) {
       var calcOne, memberAgendas;
       calcOne = function() {
+	  
         return member.set('score', _.reduce(member.get('agendas'), function(memo, agenda) {
           return memo += agendasInput[agenda.id] * agenda.score;
         }, 0));
